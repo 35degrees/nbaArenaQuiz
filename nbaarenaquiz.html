@@ -63,6 +63,15 @@ xhttp.onreadystatechange = function() {
 			return arenaQuiz();
             return false;
        } 
+       } else if (guess === null) {
+       document.getElementById("correct").textContent = ('Thanks for playing the NBA Arena Quiz!');
+       document.getElementById("logo").src = "http://sports.inquirer.net/files/2016/02/AP_090911045160-768x1024-e1455091164956.jpg";
+       document.getElementById("arena").src = "https://goodlogo.com/images/logos/national_basketball_association_nba_logo_2414.gif";
+       a.textContent = 'PLAY AGAIN';
+       a.onclick = function() {
+			return arenaQuiz();
+            return false;
+       } 
        } else if ((guess === teams[random].name) || (guess === teams[random].nickname)) {
        document.getElementById("correct").textContent = ('Yep! The ' + teams[random].nickname + ' play at ' + teams[random].stadium + '.');
        document.getElementById("logo").src = teams[random].logo;
