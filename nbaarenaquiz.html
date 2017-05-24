@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<head>
+<link href='http://fonts.googleapis.com/css?family=Cabin:300,400' rel='stylesheet' type='text/css'>
+<title>NBA Arena Quiz</title>
+<body>
+<p id="correct"></p>
+<img width=160 id="logo"></img>
+<img width=400 id="arena"></img>
+<style>
+p {
+font-family: Cabin;
+font-size: 1.6em;
+text-align: center
+}
+img {
+display: block;
+margin: auto;
+}
+#arena {
+padding-top: 30px;
+border-image-width: 4px;
+}
+a {
+display: block;
+line-height: 1.1em;
+margin-left: 46%;
+font-family: Cabin;
+padding: 15px;
+}
+a :hover {
+font-weight: bold;
+}
+</style>
+<a id="button"></a>
+<script>
+var xhttp = new XMLHttpRequest();
+xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+       var response = JSON.parse(xhttp.responseText);
+       var teams = response.teams;
+       var output = '';
+       var a = document.getElementById("button");
+       alert('Welcome to the NBA Arena Quiz! Click Close to play. Answers are case sensitive.');
+       function arenaQuiz() {
+       var random = Math.floor(Math.random() * teams.length);
+       var guess = prompt('Which NBA team plays at ' + teams[random].stadium + '?');
+       for(i=0;i<teams.length;i++) {
+       if ((teams[random].stadium === 'Staples Center') && (guess === 'Lakers')) {
+       document.getElementById("correct").textContent = ('Yep! The ' + guess + ' play at ' + teams[random].stadium + '.');
+       document.getElementById("logo").src = teams[22].logo;
+       document.getElementById("arena").src = teams[random].arena;
+       a.textContent = 'PLAY AGAIN';
+       a.onclick = function() {
+			return arenaQuiz();
+            return false;
+       } 
+       } else if ((teams[random].stadium === 'Staples Center') && (guess === 'Clippers')) {
+       document.getElementById("correct").textContent = ('Yep! The ' + guess + ' play at ' + teams[random].stadium + '.');
+       document.getElementById("logo").src = teams[21].logo;
+       document.getElementById("arena").src = teams[random].arena;
+       a.textContent = 'PLAY AGAIN';
+       a.onclick = function() {
+			return arenaQuiz();
+            return false;
+       } 
+       } else if ((guess === teams[random].name) || (guess === teams[random].nickname)) {
+       document.getElementById("correct").textContent = ('Yep! The ' + teams[random].nickname + ' play at ' + teams[random].stadium + '.');
+       document.getElementById("logo").src = teams[random].logo;
+       document.getElementById("arena").src = teams[random].arena;
+       a.textContent = 'PLAY AGAIN';
+       a.onclick = function() {
+			return arenaQuiz();
+            return false;
+          }
+       } else {
+       document.getElementById("correct").textContent = ('Nope! Not the ' + guess + '. It was the ' + teams[random].nickname + '.');
+       document.getElementById("logo").src = "http://i.cdn.turner.com/nba/nba/media/rockets/content_mutombowag.jpg";
+       document.getElementById("arena").src = teams[random].arena;
+        a.textContent = 'TRY AGAIN';
+       a.onclick = function() {
+			return arenaQuiz();
+            return false;
+            }
+       }
+       }
+       }
+       arenaQuiz();
+    }
+    document.getElementById("teams").innerHTML = output;
+};
+xhttp.open("GET", "http://anniehooker.com/samhooker/nba.json", true);
+xhttp.send();
+</script>
+</body>
+</html
