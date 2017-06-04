@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <head>
 <link href='http://fonts.googleapis.com/css?family=Cabin:300,400' rel='stylesheet' type='text/css'>
+<link rel="shortcut icon" href="http://samhooker.com/images/initials/shinitfavicon.png" type="image/jpeg" />
 <title>NBA Arena Quiz</title>
 <body>
 <p id="correct"></p>
@@ -40,10 +41,15 @@ xhttp.onreadystatechange = function() {
        var teams = response.teams;
        var output = '';
        var a = document.getElementById("button");
-       alert('Welcome to the NBA Arena Quiz! Click Close to play. Answers are case sensitive.');
+       alert('Welcome to the NBA Arena Quiz! Click below to play.');
        function arenaQuiz() {
        var random = Math.floor(Math.random() * teams.length);
        var guess = prompt('Which NBA team plays at ' + teams[random].stadium + '?');
+       var arr1 = guess.toLowerCase().split(' ');
+       for(i=0;i<arr1.length;i++) {
+       arr1[i] = arr1[i].charAt(0).toUpperCase() + arr1[i].substring(1);
+       }
+       var guess = arr1.join(' ');
        for(i=0;i<teams.length;i++) {
        if ((teams[random].stadium === 'Staples Center') && (guess === 'Lakers')) {
        document.getElementById("correct").textContent = ('Yep! The ' + guess + ' play at ' + teams[random].stadium + '.');
@@ -57,6 +63,69 @@ xhttp.onreadystatechange = function() {
        } else if ((teams[random].stadium === 'Staples Center') && (guess === 'Clippers')) {
        document.getElementById("correct").textContent = ('Yep! The ' + guess + ' play at ' + teams[random].stadium + '.');
        document.getElementById("logo").src = teams[21].logo;
+       document.getElementById("arena").src = teams[random].arena;
+       a.textContent = 'PLAY AGAIN';
+       a.onclick = function() {
+			return arenaQuiz();
+            return false;
+       } 
+          } else if ((teams[random].stadium === 'Moda Center') && (guess === 'Trail Blazers')) {
+       document.getElementById("correct").textContent = ('Yep! The ' + guess + ' play at ' + teams[random].stadium + '.');
+       document.getElementById("logo").src = teams[18].logo;
+       document.getElementById("arena").src = teams[random].arena;
+       a.textContent = 'PLAY AGAIN';
+       a.onclick = function() {
+			return arenaQuiz();
+            return false;
+       } 
+          } else if ((teams[random].stadium === 'Moda Center') && (guess === 'Trailblazers')) {
+       document.getElementById("correct").textContent = ('Yep! The ' + guess + ' play at ' + teams[random].stadium + '.');
+       document.getElementById("logo").src = teams[18].logo;
+       document.getElementById("arena").src = teams[random].arena;
+       a.textContent = 'PLAY AGAIN';
+       a.onclick = function() {
+			return arenaQuiz();
+            return false;
+       } 
+           } else if ((teams[random].stadium === 'Quicken Loans Arena') && (guess === 'Cavs')) {
+       document.getElementById("correct").textContent = ('Yep! The ' + guess + ' play at ' + teams[random].stadium + '.');
+       document.getElementById("logo").src = teams[6].logo;
+       document.getElementById("arena").src = teams[random].arena;
+       a.textContent = 'PLAY AGAIN';
+       a.onclick = function() {
+			return arenaQuiz();
+            return false;
+       } 
+           } else if ((teams[random].stadium === 'American Airlines Center') && (guess === 'Mavs')) {
+       document.getElementById("correct").textContent = ('Yep! The ' + guess + ' play at ' + teams[random].stadium + '.');
+       document.getElementById("logo").src = teams[25].logo;
+       document.getElementById("arena").src = teams[random].arena;
+       a.textContent = 'PLAY AGAIN';
+       a.onclick = function() {
+			return arenaQuiz();
+            return false;
+       } 
+              } else if ((teams[random].stadium === 'TD Garden') && (guess === 'Celts')) {
+       document.getElementById("correct").textContent = ('Yep! The ' + guess + ' play at ' + teams[random].stadium + '.');
+       document.getElementById("logo").src = teams[0].logo;
+       document.getElementById("arena").src = teams[random].arena;
+       a.textContent = 'PLAY AGAIN';
+       a.onclick = function() {
+			return arenaQuiz();
+            return false;
+       } 
+       } else if ((teams[random].stadium === 'Target Center') && (guess === 'Twolves')) {
+       document.getElementById("correct").textContent = ('Yep! The ' + guess + ' play at ' + teams[random].stadium + '.');
+       document.getElementById("logo").src = teams[16].logo;
+       document.getElementById("arena").src = teams[random].arena;
+       a.textContent = 'PLAY AGAIN';
+       a.onclick = function() {
+			return arenaQuiz();
+            return false;
+       } 
+       } else if ((teams[random].stadium === 'Oracle Arena') && (guess === 'Dubs')) {
+       document.getElementById("correct").textContent = ('Yep! The ' + guess + ' play at ' + teams[random].stadium + '.');
+       document.getElementById("logo").src = teams[20].logo;
        document.getElementById("arena").src = teams[random].arena;
        a.textContent = 'PLAY AGAIN';
        a.onclick = function() {
@@ -95,10 +164,19 @@ xhttp.onreadystatechange = function() {
        }
        arenaQuiz();
     }
-    document.getElementById("teams").innerHTML = output;
 };
-xhttp.open("GET", "http://anniehooker.com/samhooker/nba.json", true);
+xhttp.open("GET", "http://samhooker.com/data/nba.json", true);
 xhttp.send();
+</script>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-100133416-1', 'auto');
+  ga('send', 'pageview');
+
 </script>
 </body>
 </html
